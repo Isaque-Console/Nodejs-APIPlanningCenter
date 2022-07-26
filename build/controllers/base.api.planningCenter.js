@@ -13,21 +13,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDescription = void 0;
-const axios_1 = __importDefault(require("axios"));
-const urlBase = "https://api.planningcenteronline.com";
-const api = axios_1.default.create({
-    baseURL: urlBase,
-    headers: { 'Authorization': `Basic ${process.env.AUTHORIZATION}`,
-    }
-});
+const axiosConfig_1 = __importDefault(require("../config/axios/axiosConfig"));
 const getDescription = () => __awaiter(void 0, void 0, void 0, function* () {
     let description = "";
     yield (() => {
-        api.get("/services/v2/service_types/963957/plans/59630660/items")
+        axiosConfig_1.default.get("/services/v2/service_types/963957/plans/59630660/items")
             .then(response => {
             response.data.data.forEach((activity) => {
                 if (activity.attributes.title.trim().toLowerCase() === "intercessão") {
                     description = activity.attributes.description;
+                    console.log(description);
                 }
             });
         })
