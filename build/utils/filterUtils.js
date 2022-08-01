@@ -8,21 +8,23 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-const base_api_planningCenter_1 = require("./services/base.api.planningCenter");
-const URLProvider_1 = require("./services/URLProvider");
-const server = (0, express_1.default)();
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const url = yield (0, URLProvider_1.generateURL)();
-    console.log(url);
-    (0, base_api_planningCenter_1.getDescription)(url);
-}))();
-server.listen(process.env.PORT, () => {
-    console.log(`Aplication is running on port ${process.env.PORT}`);
+exports.getDescriptionByTitle = void 0;
+/**
+ * @description filter array of items by title
+ *
+ * @param request An object that contains event datas
+ * @param title The title from activity that i want
+ * @returns a string that contains the item description
+ */
+const getDescriptionByTitle = (request, title) => __awaiter(void 0, void 0, void 0, function* () {
+    const description = yield request.data.data.filter((activity) => {
+        if (activity) {
+            if (activity.attributes.title.trim().toLowerCase() === title) {
+                return activity.attributes.description;
+            }
+        }
+    });
+    return description[0].attributes.description;
 });
+exports.getDescriptionByTitle = getDescriptionByTitle;
