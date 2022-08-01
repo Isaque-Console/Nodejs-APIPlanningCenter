@@ -12,17 +12,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
-const dotenv_1 = __importDefault(require("dotenv"));
-dotenv_1.default.config();
-const base_api_planningCenter_1 = require("./services/base.api.planningCenter");
-const URLProvider_1 = require("./services/URLProvider");
-const server = (0, express_1.default)();
-(() => __awaiter(void 0, void 0, void 0, function* () {
-    const url = yield (0, URLProvider_1.generateURL)();
-    console.log(url);
-    (0, base_api_planningCenter_1.getDescription)(url);
-}))();
-server.listen(process.env.PORT, () => {
-    console.log(`Aplication is running on port ${process.env.PORT}`);
+exports.getDescription = void 0;
+const axiosConfig_1 = __importDefault(require("../config/axios/axiosConfig"));
+const filterUtils_1 = require("../utils/filterUtils");
+/**
+ * @description Get event datas from planning center and filter by title
+ *
+ * @returns a string that contains the item description
+ */
+const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
+    let description = "";
+    yield (() => {
+        axiosConfig_1.default.get(url)
+            .then((response) => __awaiter(void 0, void 0, void 0, function* () {
+            description = yield (0, filterUtils_1.getDescriptionByTitle)(response, "intercessão");
+            console.log(description);
+        }))
+            .catch(err => {
+            console.error("Ops! ocorreu um erro " + err);
+        });
+    })();
+    return description;
 });
+exports.getDescription = getDescription;

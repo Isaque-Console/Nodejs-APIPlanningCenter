@@ -6,10 +6,12 @@
  * @param title The title from activity that i want
  * @returns a string that contains the item description
  */
-export const getDescriptionByTitle = (request: any, title: string ) : string => {
-    const description = request.data.data.filter((activity : any) => {
-        if(activity.attributes.title.trim().toLowerCase() === title){
-            return activity.attributes.description;
+export const getDescriptionByTitle = async (request: any, title: string): Promise<string> => {
+    const description = await request.data.data.filter((activity: any) => {
+        if (activity) {
+            if (activity.attributes.title.trim().toLowerCase() === title) {
+                return activity.attributes.description;
+            }
         }
     });
 

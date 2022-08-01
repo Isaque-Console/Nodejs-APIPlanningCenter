@@ -6,13 +6,13 @@ import { getDescriptionByTitle } from "../utils/filterUtils";
  * 
  * @returns a string that contains the item description
  */
-export const getDescription = async () : Promise<string> => {
-    let description : string = "";
+export const getDescription = async (url: string) : Promise<string> => {
+    let description: string = "";
 
     await (() => {
-        baseAPI.get("/services/v2/service_types/963957/plans/59630660/items")
-        .then(response => {
-            description = getDescriptionByTitle(response, "intercessão");
+        baseAPI.get(url)
+        .then(async (response) => {
+            description = await getDescriptionByTitle(response, "intercessão");
             console.log(description);
         })
         .catch(err => {
