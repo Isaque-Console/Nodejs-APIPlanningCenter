@@ -20,7 +20,6 @@ const URLProvider_1 = require("./services/URLProvider");
 const server = (0, express_1.default)();
 (() => __awaiter(void 0, void 0, void 0, function* () {
     const url = yield (0, URLProvider_1.generateURL)();
-    console.log(url);
     (0, base_api_planningCenter_1.getDescription)(url);
 }))();
 server.listen(process.env.PORT, () => {

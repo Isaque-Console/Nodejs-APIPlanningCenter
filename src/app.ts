@@ -7,7 +7,6 @@ const server: express.Application = express();
 
 (async () => {
     const url: string = await generateURL();
-    console.log(url);
     getDescription(url);
 })()
 
