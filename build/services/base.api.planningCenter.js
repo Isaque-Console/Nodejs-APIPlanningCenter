@@ -25,7 +25,7 @@ const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
     yield (() => {
         axiosConfig_1.default.get(url)
             .then((response) => __awaiter(void 0, void 0, void 0, function* () {
-            description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao"]);
+            description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
             console.log((0, arrayUtils_1.convertDescriptionToArray)(description));
         }))
             .catch(err => {

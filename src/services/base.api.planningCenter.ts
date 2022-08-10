@@ -12,7 +12,7 @@ export const getDescription = async (url: string): Promise<string> => {
     await (() => {
         baseAPI.get(url)
             .then(async (response) => {
-                description = await getDescriptionByTitle(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao"]);
+                description = await getDescriptionByTitle(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
                 console.log(convertDescriptionToArray(description));
             })
             .catch(err => {
