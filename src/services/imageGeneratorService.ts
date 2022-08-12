@@ -4,14 +4,14 @@ import { v4 as uuidv4 } from 'uuid'
 import { getStickersDimensions } from './writeStickersService'
 
 // É como se fosse a prancheta que vamos desenhar, deve ter o tamanho final desejado para sua imagem
-const canvas = createCanvas(1920, 1080, "png");
+const canvas = createCanvas(1920, 1080);
 const context = canvas.getContext('2d');
 context.quality = 'best';
 context.fillStyle = '#000000';
 context.textAlign = "center";
 
 async function generateImage(sickNames: string[]) {
-    const fileName = `${uuidv4()}.png`;
+    // const fileName = `${uuidv4()}.png`;
     let bigNames: string[] = []
 
     loadImage('/home/isaque/Documentos/Projects/PlanningCenter/src/assets/wallpaper.png').then(async (image) => {
@@ -175,12 +175,12 @@ async function generateImage(sickNames: string[]) {
 
                 context.font = `${fontSize}px Mont Serrat`;
                 if (typeof sickNames[i] === "string") context.fillText(sickNames[i], (dx + namesFrontStickers), namesDY);
-                else {
-                    for (let name of sickNames[i]) {
-                        context.fillText(name, (dx + namesFrontStickers), namesDY);
-                        namesDY += 40;
-                    }
-                }
+                // else {
+                //     for (let name of sickNames[i]) {
+                //         context.fillText(name, (dx + namesFrontStickers), namesDY);
+                //         namesDY += 40;
+                //     }
+                // }
 
                 if (bigNames.length !== 0) {
                     for (let name of bigNames) {

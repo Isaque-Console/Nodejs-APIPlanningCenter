@@ -6,6 +6,7 @@ export const getDayOfTheWeek = (): string => {
     if (indexOfTheWeek === 0 || indexOfTheWeek === 2) return daysOfTheWeek[indexOfTheWeek]
 
     return "Terça-Feira";
+    // return "";
 }
 
 /**

@@ -13,22 +13,21 @@ import { convertDescriptionToArray } from "./utils/arrayUtils";
 // const __filename = fileURLToPath(import.meta.url);
 // const directory = path.dirname(__filename);
 
-// (async () => {
-//     const url: string = await generateURL();
-//     getDescription(url);
-// })()
 
 server.get('/generate/image', async (req, res) => {
     const url: string = await generateURL();
     const description = await getDescription(url);
-    if (description.length === 0) return res.send({message: "Não tem nenhum registro para hoje."})    
+    if (description.length === 0) return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
 
-    const canvas = await generateImage(convertDescriptionToArray(description));
-    const pngData = canvas.createPNGStream()
+    try {
+        const canvas = await generateImage(convertDescriptionToArray(description));
+        const pngData = canvas.createPNGStream()
 
-    // set response header: Content-Disposition
-    res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
-    pngData.pipe(res);
+        res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
+        pngData.pipe(res);
+    } catch (error: any) {
+        res.setHeader('Content-Type', 'application/json');
+        res.end(JSON.stringify({ error: "Erro ao gerar imagem" }));}
 })
 
 server.listen(process.env.PORT, () => {

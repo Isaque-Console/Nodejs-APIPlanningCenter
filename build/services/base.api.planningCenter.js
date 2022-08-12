@@ -21,17 +21,9 @@ const arrayUtils_1 = require("../utils/arrayUtils");
  * @returns a string that contains the item description
  */
 const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
-    let description = "";
-    yield (() => {
-        axiosConfig_1.default.get(url)
-            .then((response) => __awaiter(void 0, void 0, void 0, function* () {
-            description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
-            console.log((0, arrayUtils_1.convertDescriptionToArray)(description));
-        }))
-            .catch(err => {
-            console.error("Ops! ocorreu um erro " + err);
-        });
-    })();
+    const response = yield axiosConfig_1.default.get(url);
+    const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
+    console.log((0, arrayUtils_1.convertDescriptionToArray)(description));
     return description;
 });
 exports.getDescription = getDescription;

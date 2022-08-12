@@ -10,17 +10,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const canvas_1 = require("canvas");
-const uuid_1 = require("uuid");
 const writeStickersService_1 = require("./writeStickersService");
 // É como se fosse a prancheta que vamos desenhar, deve ter o tamanho final desejado para sua imagem
-const canvas = (0, canvas_1.createCanvas)(1920, 1080, "png");
+const canvas = (0, canvas_1.createCanvas)(1920, 1080);
 const context = canvas.getContext('2d');
 context.quality = 'best';
 context.fillStyle = '#000000';
 context.textAlign = "center";
 function generateImage(sickNames) {
     return __awaiter(this, void 0, void 0, function* () {
-        const fileName = `${(0, uuid_1.v4)()}.png`;
+        // const fileName = `${uuidv4()}.png`;
         let bigNames = [];
         (0, canvas_1.loadImage)('/home/isaque/Documentos/Projects/PlanningCenter/src/assets/wallpaper.png').then((image) => __awaiter(this, void 0, void 0, function* () {
             context.drawImage(image, 0, 0, 1920, 1080);
