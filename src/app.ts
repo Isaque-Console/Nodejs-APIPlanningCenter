@@ -4,15 +4,8 @@ dotenv.config();
 import { getDescription } from "./services/base.api.planningCenter"
 import { generateURL } from "./services/URLProvider";
 const server: express.Application = express();
-import path from 'path'
-import fs from 'fs'
-import { fileURLToPath } from 'url';
 import generateImage from './services/imageGeneratorService'
 import { convertDescriptionToArray } from "./utils/arrayUtils";
-
-// const __filename = fileURLToPath(import.meta.url);
-// const directory = path.dirname(__filename);
-
 
 server.get('/generate/image', async (req, res) => {
     const url: string = await generateURL();
@@ -20,14 +13,44 @@ server.get('/generate/image', async (req, res) => {
     if (description.length === 0) return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
 
     try {
-        const canvas = await generateImage(convertDescriptionToArray(description));
-        const pngData = canvas.createPNGStream()
+        const canvas = await generateImage([
+            'Lindemberguil Correia',
+            'Familia Júnior Amorim',
+            'Antonio Pinheiro',
+            'Marli',
+            'Noelia',
+            'Singlair Martins',
+            'Maria Nascimento',
+            'Jane Nascimento',
+            'Ozias Nascimento',
+            'Luzimar de Fatima',
+            'Maria Celine',
+            'Ricardo Menezes',
+            'José Alves', 'Lindemberguildso Correia',
+            'Marlene Martins',
+            'Antonio Pinheiro',
+            'Marli',
+            'Noelia',
+            'Singlair Martins',
+            'Maria Nascimento',
+            'Jane Nascimento',
+            'Ozias Nascimento',
+            'Luzimar de Fatima',
+            'Maria Celine',
+            'Ricardo Menezes',
+            'José Alves',            'Luzimar de Fatima',
+            'Maria Celine',
+            'Ricardo Menezes',
+            'José Alves'
+        ]);
+        const pngData = canvas.createPNGStream();
 
         res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
         pngData.pipe(res);
     } catch (error: any) {
         res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ error: "Erro ao gerar imagem" }));}
+        res.end(JSON.stringify({ error: "Erro ao gerar imagem" }));
+    }
 })
 
 server.listen(process.env.PORT, () => {

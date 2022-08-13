@@ -1,7 +1,6 @@
-import { promises } from 'fs'
 import { createCanvas, loadImage } from 'canvas'
-import { v4 as uuidv4 } from 'uuid'
 import { getStickersDimensions } from './writeStickersService'
+import path from 'path';
 
 // É como se fosse a prancheta que vamos desenhar, deve ter o tamanho final desejado para sua imagem
 const canvas = createCanvas(1920, 1080);
@@ -11,13 +10,12 @@ context.fillStyle = '#000000';
 context.textAlign = "center";
 
 async function generateImage(sickNames: string[]) {
-    // const fileName = `${uuidv4()}.png`;
     let bigNames: string[] = []
 
-    loadImage('/home/isaque/Documentos/Projects/PlanningCenter/src/assets/wallpaper.png').then(async (image) => {
+    loadImage(path.resolve("./src/assets/wallpaper.png")).then(async (image) => {
         context.drawImage(image, 0, 0, 1920, 1080);
 
-        loadImage("/home/isaque/Documentos/Projects/PlanningCenter/src/assets/sticker.png").then(async (image) => {
+        loadImage(path.resolve("./src/assets/sticker.png")).then(async (image) => {
             // garantir o maximo de 30 nomes
             sickNames.length = sickNames.length > 30 ? 30 : sickNames.length;
 
@@ -35,7 +33,6 @@ async function generateImage(sickNames: string[]) {
             if (sickNames.length === 1) { namesDY = 640; }
             else if (sickNames.length < 10) { namesDY = 445; }
             else if (sickNames.length < 17) { namesDY = 423; }
-            else if (sickNames.length < 16) { namesDY = 423; }
             else { namesDY = 365; }
 
             namesDYBase = namesDY;
@@ -44,7 +41,6 @@ async function generateImage(sickNames: string[]) {
                 context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
 
                 // Escrever os nomes
-
                 if (sickNames.length === 1) {
                     namesFrontStickers = 255;
                     if (sickNames[i].length < 15) {
@@ -56,20 +52,18 @@ async function generateImage(sickNames: string[]) {
                             splittedArray[1] += " " + splittedArray[2];
                             splittedArray.pop();
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 37;
                             namesDY -= 19;
                             namesFrontStickers = 255;
                         } else {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 37;
                             namesDY -= 19;
                             namesFrontStickers = 255;
                         }
                     }
-                } else if (sickNames.length === 2) {
+                } else if (sickNames.length < 10) {
                     namesFrontStickers = 255;
                     if (sickNames[i].length < 15) {
                         fontSize = 37;
@@ -81,14 +75,12 @@ async function generateImage(sickNames: string[]) {
                             splittedArray[1] += " " + splittedArray[2];
                             splittedArray.pop();
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 37;
                             namesDY += 160;
                             namesFrontStickers = 255;
                         } else {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 37;
                             namesDY += 160;
                             namesFrontStickers = 255;
@@ -109,14 +101,12 @@ async function generateImage(sickNames: string[]) {
                             splittedArray[1] += " " + splittedArray[2];
                             splittedArray.pop();
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 30;
                             namesDY -= 19;
                             namesFrontStickers = 220;
                         } else {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 30;
                             namesDY -= 19;
                             namesFrontStickers = 220;
@@ -129,14 +119,12 @@ async function generateImage(sickNames: string[]) {
                         splittedArray[1] += " " + splittedArray[2];
                         splittedArray.pop();
                         bigNames = splittedArray;
-                        // sickNames[i] = splittedArray;
                         fontSize = 30;
                         namesDY -= 27;
                         namesFrontStickers = 220;
                     } else {
                         // Ex: Fulano Araújo
                         bigNames = splittedArray;
-                        // sickNames[i] = splittedArray;
                         fontSize = 30;
                         namesDY -= 27;
                         namesFrontStickers = 220;
@@ -153,17 +141,15 @@ async function generateImage(sickNames: string[]) {
                             splittedArray[1] += " " + splittedArray[2];
                             splittedArray.pop();
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 30;
                             namesDY -= 20;
-                            namesFrontStickers = 200;
+                            namesFrontStickers = 198;
                         } else if (splittedArray.length === 2) {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
-                            // sickNames[i] = splittedArray;
                             fontSize = 30;
                             namesDY -= 20;
-                            namesFrontStickers = 200;
+                            namesFrontStickers = 198;
                         }
                         else {
                             fontSize = 28;
@@ -173,21 +159,16 @@ async function generateImage(sickNames: string[]) {
                     }
                 }
 
-                context.font = `${fontSize}px Mont Serrat`;
-                if (typeof sickNames[i] === "string") context.fillText(sickNames[i], (dx + namesFrontStickers), namesDY);
-                // else {
-                //     for (let name of sickNames[i]) {
-                //         context.fillText(name, (dx + namesFrontStickers), namesDY);
-                //         namesDY += 40;
-                //     }
-                // }
-
                 if (bigNames.length !== 0) {
                     for (let name of bigNames) {
+                        context.font = `${fontSize}px Mont Serrat`;
                         context.fillText(name, (dx + namesFrontStickers), namesDY);
                         namesDY += 40;
-                        bigNames.shift();
                     }
+                    bigNames = [];
+                } else {
+                    context.font = `${fontSize}px Mont Serrat`;
+                    context.fillText(sickNames[i], (dx + namesFrontStickers), namesDY);
                 }
 
                 namesDY = namesDYBase;
@@ -201,8 +182,6 @@ async function generateImage(sickNames: string[]) {
                 } else {
                     if (sickNames.length === 1) { namesDY = 640; }
                 }
-
-
 
                 dx += stickersWidth - horizontalProximityStickers;
             }
