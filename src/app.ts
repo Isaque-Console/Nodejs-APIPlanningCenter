@@ -31,7 +31,7 @@ server.get('/generate/image', async (req, res) => {
         const image = await generateImage(convertDescriptionToArray(description));
         const pngData = image.createPNGStream();
 
-        res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
+        res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao.png`);
         pngData.pipe(res);
     } catch (error: any) {
         res.setHeader('Content-Type', 'application/json');
