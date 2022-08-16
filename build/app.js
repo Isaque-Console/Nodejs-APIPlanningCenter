@@ -19,44 +19,31 @@ const base_api_planningCenter_1 = require("./services/base.api.planningCenter");
 const URLProvider_1 = require("./services/URLProvider");
 const server = (0, express_1.default)();
 const imageGeneratorService_1 = __importDefault(require("./services/imageGeneratorService"));
+const arrayUtils_1 = require("./utils/arrayUtils");
+server.get('/', (_req, res, _next) => __awaiter(void 0, void 0, void 0, function* () {
+    // optional: add further things to check (e.g. connecting to dababase)
+    const healthcheck = {
+        uptime: process.uptime(),
+        message: 'OK',
+        timestamp: Date.now()
+    };
+    try {
+        res.send(healthcheck);
+    }
+    catch (e) {
+        healthcheck.message = e;
+        res.status(503).send();
+    }
+}));
 server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = yield (0, URLProvider_1.generateURL)();
     const description = yield (0, base_api_planningCenter_1.getDescription)(url);
     if (description.length === 0)
         return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
     try {
-        const canvas = yield (0, imageGeneratorService_1.default)([
-            'Lindemberguil Correia',
-            'Familia Júnior Amorim',
-            'Antonio Pinheiro',
-            'Marli',
-            'Noelia',
-            'Singlair Martins',
-            'Maria Nascimento',
-            'Jane Nascimento',
-            'Ozias Nascimento',
-            'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves', 'Lindemberguildso Correia',
-            'Marlene Martins',
-            'Antonio Pinheiro',
-            'Marli',
-            'Noelia',
-            'Singlair Martins',
-            'Maria Nascimento',
-            'Jane Nascimento',
-            'Ozias Nascimento',
-            'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves', 'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves'
-        ]);
-        const pngData = canvas.createPNGStream();
-        res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
+        const image = yield (0, imageGeneratorService_1.default)((0, arrayUtils_1.convertDescriptionToArray)(description));
+        const pngData = image.createPNGStream();
+        res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao.png`);
         pngData.pipe(res);
     }
     catch (error) {

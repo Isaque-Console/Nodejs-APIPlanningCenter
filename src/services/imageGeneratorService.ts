@@ -64,7 +64,7 @@ async function generateImage(sickNames: string[]) {
                         }
                     }
                 } else if (sickNames.length < 10) {
-                    namesFrontStickers = 255;
+                    namesFrontStickers = 225;
                     if (sickNames[i].length < 15) {
                         fontSize = 37;
                         // namesDY += 170;
@@ -77,13 +77,13 @@ async function generateImage(sickNames: string[]) {
                             bigNames = splittedArray;
                             fontSize = 37;
                             namesDY -= 20;
-                            namesFrontStickers = 255;
+                            namesFrontStickers = 225;
                         } else {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
                             fontSize = 37;
                             namesDY -= 20;
-                            namesFrontStickers = 255;
+                            namesFrontStickers = 225;
                         }
                     }
                 }

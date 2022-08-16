@@ -76,10 +76,10 @@ function generateImage(sickNames) {
                         }
                     }
                     else if (sickNames.length < 10) {
-                        namesFrontStickers = 255;
+                        namesFrontStickers = 230;
                         if (sickNames[i].length < 15) {
                             fontSize = 37;
-                            namesDY += 170;
+                            // namesDY += 170;
                         }
                         else {
                             const splittedArray = sickNames[i].split(" ");
@@ -89,15 +89,15 @@ function generateImage(sickNames) {
                                 splittedArray.pop();
                                 bigNames = splittedArray;
                                 fontSize = 37;
-                                namesDY += 160;
-                                namesFrontStickers = 255;
+                                namesDY -= 20;
+                                namesFrontStickers = 230;
                             }
                             else {
                                 // Ex: Fulano Araújo
                                 bigNames = splittedArray;
                                 fontSize = 37;
-                                namesDY += 160;
-                                namesFrontStickers = 255;
+                                namesDY -= 20;
+                                namesFrontStickers = 230;
                             }
                         }
                     }
