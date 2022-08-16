@@ -7,6 +7,21 @@ const server: express.Application = express();
 import generateImage from './services/imageGeneratorService'
 import { convertDescriptionToArray } from "./utils/arrayUtils";
 
+server.get('/', async (_req, res, _next) => {
+	// optional: add further things to check (e.g. connecting to dababase)
+	const healthcheck = {
+		uptime: process.uptime(),
+		message: 'OK',
+		timestamp: Date.now()
+	};
+	try {
+		res.send(healthcheck);
+	} catch (e: any) {
+		healthcheck.message = e;
+		res.status(503).send();
+	}
+});
+
 server.get('/generate/image', async (req, res) => {
     const url: string = await generateURL();
     const description = await getDescription(url);
