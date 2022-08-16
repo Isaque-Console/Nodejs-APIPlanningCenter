@@ -27,7 +27,7 @@ server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, fu
     try {
         const canvas = yield (0, imageGeneratorService_1.default)([
             'Lindemberguil Correia',
-            'Marlene Martins',
+            'Familia Júnior Amorim',
             'Antonio Pinheiro',
             'Marli',
             'Noelia',

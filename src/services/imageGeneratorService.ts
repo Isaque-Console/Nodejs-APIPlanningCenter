@@ -67,7 +67,7 @@ async function generateImage(sickNames: string[]) {
                     namesFrontStickers = 255;
                     if (sickNames[i].length < 15) {
                         fontSize = 37;
-                        namesDY += 170;
+                        // namesDY += 170;
                     } else {
                         const splittedArray = sickNames[i].split(" ");
                         // Ex: "fulano de araújo 
@@ -76,13 +76,13 @@ async function generateImage(sickNames: string[]) {
                             splittedArray.pop();
                             bigNames = splittedArray;
                             fontSize = 37;
-                            namesDY += 160;
+                            namesDY -= 20;
                             namesFrontStickers = 255;
                         } else {
                             // Ex: Fulano Araújo
                             bigNames = splittedArray;
                             fontSize = 37;
-                            namesDY += 160;
+                            namesDY -= 20;
                             namesFrontStickers = 255;
                         }
                     }

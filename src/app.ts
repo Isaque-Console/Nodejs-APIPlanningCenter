@@ -13,37 +13,8 @@ server.get('/generate/image', async (req, res) => {
     if (description.length === 0) return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
 
     try {
-        const canvas = await generateImage([
-            'Lindemberguil Correia',
-            'Familia Júnior Amorim',
-            'Antonio Pinheiro',
-            'Marli',
-            'Noelia',
-            'Singlair Martins',
-            'Maria Nascimento',
-            'Jane Nascimento',
-            'Ozias Nascimento',
-            'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves', 'Lindemberguildso Correia',
-            'Marlene Martins',
-            'Antonio Pinheiro',
-            'Marli',
-            'Noelia',
-            'Singlair Martins',
-            'Maria Nascimento',
-            'Jane Nascimento',
-            'Ozias Nascimento',
-            'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves',            'Luzimar de Fatima',
-            'Maria Celine',
-            'Ricardo Menezes',
-            'José Alves'
-        ]);
-        const pngData = canvas.createPNGStream();
+        const image = await generateImage(convertDescriptionToArray(description));
+        const pngData = image.createPNGStream();
 
         res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao`);
         pngData.pipe(res);
