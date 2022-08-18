@@ -1,0 +1,11 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.context = exports.canvas = void 0;
+const canvas_1 = require("canvas");
+const canvas = (0, canvas_1.createCanvas)(1920, 1080);
+exports.canvas = canvas;
+const context = canvas.getContext('2d');
+exports.context = context;
+context.quality = 'best';
+context.fillStyle = '#000000';
+context.textAlign = "center";

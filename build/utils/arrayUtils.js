@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
+exports.getSecondName = exports.fixBigStrings = exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
 /**
  * @description filter array of items by title
  *
@@ -36,3 +36,18 @@ const convertDescriptionToArray = (description) => {
     return arrayOfNames;
 };
 exports.convertDescriptionToArray = convertDescriptionToArray;
+const fixBigStrings = (name) => {
+    let fixedString = name;
+    if (name.length > 14) {
+        fixedString = name.slice(0, 12);
+        fixedString += "...";
+    }
+    return fixedString;
+};
+exports.fixBigStrings = fixBigStrings;
+const getSecondName = (splittedName) => {
+    const secondNames = splittedName.slice(1, splittedName.length + 1);
+    const secondName = secondNames.join(" ");
+    return secondName;
+};
+exports.getSecondName = getSecondName;

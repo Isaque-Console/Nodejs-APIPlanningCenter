@@ -9,7 +9,6 @@ import { convertDescriptionToArray, getDescriptionByTitle } from "../utils/array
 export const getDescription = async (url: string): Promise<string> => {
     const response = await baseAPI.get(url);
     const description = await getDescriptionByTitle(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
-    console.log(convertDescriptionToArray(description));
 
     return description;
 }

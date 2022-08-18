@@ -13,26 +13,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const canvas_1 = require("canvas");
+const canvasConfig_1 = require("../config/canvas/canvasConfig");
 const writeStickersService_1 = require("./writeStickersService");
 const path_1 = __importDefault(require("path"));
-// É como se fosse a prancheta que vamos desenhar, deve ter o tamanho final desejado para sua imagem
-const canvas = (0, canvas_1.createCanvas)(1920, 1080);
-const context = canvas.getContext('2d');
-context.quality = 'best';
-context.fillStyle = '#000000';
-context.textAlign = "center";
+const arrayUtils_1 = require("../utils/arrayUtils");
+function writeNames(namesWithWhiteSpace, fontSize, dx, namesFrontStickers, namesDY, sickName, lineBreakSize) {
+    if (namesWithWhiteSpace.length !== 0) {
+        for (let name of namesWithWhiteSpace) {
+            canvasConfig_1.context.font = `500 ${fontSize}px RobotoFlex`;
+            const fixedName = (0, arrayUtils_1.fixBigStrings)(name);
+            canvasConfig_1.context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+            namesDY += lineBreakSize;
+        }
+        namesWithWhiteSpace = [];
+    }
+    else {
+        canvasConfig_1.context.font = `500 ${fontSize}px RobotoFlex`;
+        const fixedName = (0, arrayUtils_1.fixBigStrings)(sickName);
+        canvasConfig_1.context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+    }
+}
 function generateImage(sickNames) {
     return __awaiter(this, void 0, void 0, function* () {
-        let bigNames = [];
+        let namesWithWhiteSpace = [];
         (0, canvas_1.loadImage)(path_1.default.resolve("./src/assets/wallpaper.png")).then((image) => __awaiter(this, void 0, void 0, function* () {
-            context.drawImage(image, 0, 0, 1920, 1080);
+            canvasConfig_1.context.drawImage(image, 0, 0, 1920, 1080);
             (0, canvas_1.loadImage)(path_1.default.resolve("./src/assets/sticker.png")).then((image) => __awaiter(this, void 0, void 0, function* () {
                 // garantir o maximo de 30 nomes
                 sickNames.length = sickNames.length > 30 ? 30 : sickNames.length;
+                const lineBreakSize = sickNames.length > 1 ? 40 : 55;
                 //pegar dimensoes dos adesivos
                 let { initialBorder, limitOfColumns, dx, dy, stickersWidth, stickersHeight, horizontalProximityStickers, verticalProximityStickers } = (0, writeStickersService_1.getStickersDimensions)(sickNames);
                 // dimensoes dos nomes
-                let namesFrontStickers = 220, namesDY = 360, fontSize = 28, namesDYBase;
+                let namesDX = 220, namesDY = 360, fontSize = 28, namesDYBase;
                 // atualizar o DY dos nomes de acordo com o tamanho 
                 if (sickNames.length === 1) {
                     namesDY = 640;
@@ -48,149 +61,79 @@ function generateImage(sickNames) {
                 }
                 namesDYBase = namesDY;
                 for (let i = 0; i < sickNames.length; i++) {
-                    context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
+                    canvasConfig_1.context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
                     // Escrever os nomes
                     if (sickNames.length === 1) {
-                        namesFrontStickers = 255;
-                        if (sickNames[i].length < 15) {
-                            fontSize = 37;
+                        const splittedArray = sickNames[i].split(" ");
+                        if (splittedArray.length > 1) {
+                            splittedArray[1] = (0, arrayUtils_1.getSecondName)(splittedArray);
+                            splittedArray.length = 2;
+                            namesDY -= 19;
                         }
                         else {
-                            const splittedArray = sickNames[i].split(" ");
-                            // Ex: "fulano de araújo 
-                            if (splittedArray.length > 2) {
-                                splittedArray[1] += " " + splittedArray[2];
-                                splittedArray.pop();
-                                bigNames = splittedArray;
-                                fontSize = 37;
-                                namesDY -= 19;
-                                namesFrontStickers = 255;
-                            }
-                            else {
-                                // Ex: Fulano Araújo
-                                bigNames = splittedArray;
-                                fontSize = 37;
-                                namesDY -= 19;
-                                namesFrontStickers = 255;
-                            }
+                            namesDY -= 10;
                         }
+                        namesWithWhiteSpace = splittedArray;
+                        fontSize = 37;
+                        namesDX = 255;
                     }
                     else if (sickNames.length < 10) {
-                        namesFrontStickers = 230;
-                        if (sickNames[i].length < 15) {
-                            fontSize = 37;
-                            // namesDY += 170;
+                        const splittedArray = sickNames[i].split(" ");
+                        if (splittedArray.length > 1) {
+                            splittedArray[1] = (0, arrayUtils_1.getSecondName)(splittedArray);
+                            splittedArray.length = 2;
+                            namesDY -= 20;
                         }
                         else {
-                            const splittedArray = sickNames[i].split(" ");
-                            // Ex: "fulano de araújo 
-                            if (splittedArray.length > 2) {
-                                splittedArray[1] += " " + splittedArray[2];
-                                splittedArray.pop();
-                                bigNames = splittedArray;
-                                fontSize = 37;
-                                namesDY -= 20;
-                                namesFrontStickers = 230;
-                            }
-                            else {
-                                // Ex: Fulano Araújo
-                                bigNames = splittedArray;
-                                fontSize = 37;
-                                namesDY -= 20;
-                                namesFrontStickers = 230;
-                            }
+                            namesDY -= 11;
                         }
+                        namesDX = 225;
+                        namesWithWhiteSpace = splittedArray;
+                        fontSize = 31;
                     }
                     else if (sickNames.length < 17) {
-                        if (sickNames[i].length < 15) {
-                            namesFrontStickers = 220;
-                            fontSize = 32;
-                        }
-                        else if (sickNames[i].length === 15 || sickNames[i].length === 16) {
-                            namesFrontStickers = 223;
-                            fontSize = 30;
+                        const splittedArray = sickNames[i].split(" ");
+                        if (splittedArray.length > 1) {
+                            splittedArray[1] = (0, arrayUtils_1.getSecondName)(splittedArray);
+                            splittedArray.length = 2;
+                            namesDY -= 19;
                         }
                         else {
-                            const splittedArray = sickNames[i].split(" ");
-                            // Ex: "fulano de araújo 
-                            if (splittedArray.length > 2) {
-                                splittedArray[1] += " " + splittedArray[2];
-                                splittedArray.pop();
-                                bigNames = splittedArray;
-                                fontSize = 30;
-                                namesDY -= 19;
-                                namesFrontStickers = 220;
-                            }
-                            else {
-                                // Ex: Fulano Araújo
-                                bigNames = splittedArray;
-                                fontSize = 30;
-                                namesDY -= 19;
-                                namesFrontStickers = 220;
-                            }
+                            namesDY -= 10;
                         }
+                        namesWithWhiteSpace = splittedArray;
+                        fontSize = 30;
+                        namesDX = 220;
                     }
                     else if (sickNames.length < 26) {
                         const splittedArray = sickNames[i].split(" ");
-                        // Ex: "fulano de araújo 
-                        if (splittedArray.length > 2) {
-                            splittedArray[1] += " " + splittedArray[2];
-                            splittedArray.pop();
-                            bigNames = splittedArray;
-                            fontSize = 30;
+                        if (splittedArray.length > 1) {
+                            splittedArray[1] = (0, arrayUtils_1.getSecondName)(splittedArray);
+                            splittedArray.length = 2;
                             namesDY -= 27;
-                            namesFrontStickers = 220;
                         }
                         else {
-                            // Ex: Fulano Araújo
-                            bigNames = splittedArray;
-                            fontSize = 30;
-                            namesDY -= 27;
-                            namesFrontStickers = 220;
+                            namesDY -= 18;
                         }
-                        namesFrontStickers = 200;
-                        fontSize = 28;
+                        namesDX = 200;
+                        fontSize = 26;
+                        namesWithWhiteSpace = splittedArray;
                     }
                     else if (sickNames.length < 31) {
-                        namesFrontStickers = 197;
-                        if (sickNames[i].length > 14) {
-                            const splittedArray = sickNames[i].split(" ");
-                            // Ex: "fulano de araújo 
-                            if (splittedArray.length > 2) {
-                                splittedArray[1] += " " + splittedArray[2];
-                                splittedArray.pop();
-                                bigNames = splittedArray;
-                                fontSize = 30;
-                                namesDY -= 20;
-                                namesFrontStickers = 198;
-                            }
-                            else if (splittedArray.length === 2) {
-                                // Ex: Fulano Araújo
-                                bigNames = splittedArray;
-                                fontSize = 30;
-                                namesDY -= 20;
-                                namesFrontStickers = 198;
-                            }
-                            else {
-                                fontSize = 28;
-                            }
+                        const splittedArray = sickNames[i].split(" ");
+                        if (splittedArray.length > 1) {
+                            splittedArray[1] = (0, arrayUtils_1.getSecondName)(splittedArray);
+                            splittedArray.length = 2;
+                            namesDY -= 20;
                         }
                         else {
-                            fontSize = 32;
+                            namesDY -= 5;
                         }
+                        namesDX = 198;
+                        fontSize = 29;
+                        namesWithWhiteSpace = splittedArray;
                     }
-                    if (bigNames.length !== 0) {
-                        for (let name of bigNames) {
-                            context.font = `${fontSize}px Mont Serrat`;
-                            context.fillText(name, (dx + namesFrontStickers), namesDY);
-                            namesDY += 40;
-                        }
-                        bigNames = [];
-                    }
-                    else {
-                        context.font = `${fontSize}px Mont Serrat`;
-                        context.fillText(sickNames[i], (dx + namesFrontStickers), namesDY);
-                    }
+                    writeNames(namesWithWhiteSpace, fontSize, dx, namesDX, namesDY, sickNames[i], lineBreakSize);
                     namesDY = namesDYBase;
                     if ((i + 1) % limitOfColumns === 0) {
                         dx = initialBorder;
@@ -208,7 +151,7 @@ function generateImage(sickNames) {
                 }
             }));
         }));
-        return canvas;
+        return canvasConfig_1.canvas;
     });
 }
 exports.default = generateImage;

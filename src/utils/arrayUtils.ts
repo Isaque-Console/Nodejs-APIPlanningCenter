@@ -26,3 +26,20 @@ export const convertDescriptionToArray = (description: string): Array<string> =>
 
     return arrayOfNames;
 }
+
+export const fixBigStrings = (name: string): string => {
+    let fixedString: string = name;
+    if (name.length > 14) {
+        fixedString = name.slice(0, 12);
+        fixedString += "...";
+    }
+
+    return fixedString;
+}
+
+export const getSecondName = (splittedName: string[]): string => {
+    const secondNames: string[] = splittedName.slice(1, splittedName.length + 1);
+    const secondName = secondNames.join(" ");
+
+    return secondName;
+}

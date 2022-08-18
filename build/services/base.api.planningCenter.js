@@ -23,7 +23,6 @@ const arrayUtils_1 = require("../utils/arrayUtils");
 const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield axiosConfig_1.default.get(url);
     const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
-    console.log((0, arrayUtils_1.convertDescriptionToArray)(description));
     return description;
 });
 exports.getDescription = getDescription;
