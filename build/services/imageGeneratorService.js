@@ -41,11 +41,11 @@ function generateImage(sickNames) {
             (0, canvas_1.loadImage)(path_1.default.resolve("./src/assets/sticker.png")).then((image) => __awaiter(this, void 0, void 0, function* () {
                 // garantir o maximo de 30 nomes
                 sickNames.length = sickNames.length > 30 ? 30 : sickNames.length;
-                const lineBreakSize = sickNames.length > 1 ? 40 : 55;
                 //pegar dimensoes dos adesivos
                 let { initialBorder, limitOfColumns, dx, dy, stickersWidth, stickersHeight, horizontalProximityStickers, verticalProximityStickers } = (0, writeStickersService_1.getStickersDimensions)(sickNames);
                 // dimensoes dos nomes
                 let namesDX = 220, namesDY = 360, fontSize = 28, namesDYBase;
+                const lineBreakSize = sickNames.length > 1 ? 40 : 55;
                 // atualizar o DY dos nomes de acordo com o tamanho 
                 if (sickNames.length === 1) {
                     namesDY = 640;
@@ -62,7 +62,6 @@ function generateImage(sickNames) {
                 namesDYBase = namesDY;
                 for (let i = 0; i < sickNames.length; i++) {
                     canvasConfig_1.context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
-                    // Escrever os nomes
                     if (sickNames.length === 1) {
                         const splittedArray = sickNames[i].split(" ");
                         if (splittedArray.length > 1) {
@@ -113,7 +112,7 @@ function generateImage(sickNames) {
                             namesDY -= 27;
                         }
                         else {
-                            namesDY -= 18;
+                            namesDY -= 15;
                         }
                         namesDX = 200;
                         fontSize = 26;

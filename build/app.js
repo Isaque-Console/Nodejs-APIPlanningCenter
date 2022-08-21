@@ -19,14 +19,14 @@ const base_api_planningCenter_1 = require("./services/base.api.planningCenter");
 const URLProvider_1 = require("./services/URLProvider");
 const server = (0, express_1.default)();
 const imageGeneratorService_1 = __importDefault(require("./services/imageGeneratorService"));
+const arrayUtils_1 = require("./utils/arrayUtils");
 server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = yield (0, URLProvider_1.generateURL)();
     const description = yield (0, base_api_planningCenter_1.getDescription)(url);
     if (description.length === 0)
         return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
     try {
-        // const image = await generateImage(convertDescriptionToArray(description));
-        const image = yield (0, imageGeneratorService_1.default)(["Luzimar de Fátima Nascimento", "Manoel Ozias Nascimento", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "Zé", "Lindenberg Correia", "José araújo", "Jonatan Rodrigues", "Lindenberg Correia", "José araújo"]);
+        const image = yield (0, imageGeneratorService_1.default)((0, arrayUtils_1.convertDescriptionToArray)(description));
         const pngData = image.createPNGStream();
         res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao.png`);
         pngData.pipe(res);

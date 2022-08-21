@@ -84,7 +84,7 @@ async function generateImage(sickNames: string[]) {
                         splittedArray.length = 2;
                         namesDY -= 19;
                     } else {
-                        namesDY -= 10;
+                        namesDY -= 7;
                     }
                     namesWithWhiteSpace = splittedArray;
                     fontSize = 30;
@@ -96,7 +96,7 @@ async function generateImage(sickNames: string[]) {
                         splittedArray.length = 2;
                         namesDY -= 27;
                     } else {
-                        namesDY -= 18;
+                        namesDY -= 15;
                     }
                     namesDX = 200;
                     fontSize = 26;
