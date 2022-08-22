@@ -8,9 +8,6 @@ export const getDayOfTheWeek = (): string => {
     return "";
 }
 
-/**
- * @return Must return the difference in weeks between the current date and the day of the week constant 
- */
 export const subtractDate = (dayOfTheWeek: string): number => {
     const now = dayjs();
 
