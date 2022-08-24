@@ -20,9 +20,22 @@ export const getDescriptionByTitle = async (request: any, title: Array<string>):
 }
 
 export const convertDescriptionToArray = (description: string): Array<string> => {
-    const splittedArray = description.replace(/(\r\n|\n|\r)/gm, "").split("-");
-    const arrayOfNames = splittedArray.map(name => name.trim());
-    arrayOfNames.shift();
+    const splittedArray: string[] = description.split("\n");    
+    let arrayOfNames: string[] = verifyIfItsName(splittedArray);
+
+    return arrayOfNames;
+}
+
+export const verifyIfItsName = (splittedByLineBreak: string[]): string[] => {
+    let arrayOfNames: string[] = [];
+
+    splittedByLineBreak.forEach(name => {
+        console.log(name);
+        
+        if (name.trim()[0] === "-") {           
+            arrayOfNames.push(name.replace("-", "").trim().slice(0,name.length));
+        }
+    })
 
     return arrayOfNames;
 }

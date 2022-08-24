@@ -1,5 +1,5 @@
 import baseAPI from "../config/axios/axiosConfig";
-import { convertDescriptionToArray, getDescriptionByTitle } from "../utils/arrayUtils";
+import { getDescriptionByTitle } from "../utils/arrayUtils";
 
 /**
  * @description Get event datas from planning center and filter by title  
