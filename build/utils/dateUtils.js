@@ -13,9 +13,6 @@ const getDayOfTheWeek = () => {
     return "";
 };
 exports.getDayOfTheWeek = getDayOfTheWeek;
-/**
- * @return Must return the difference in weeks between the current date and the day of the week constant
- */
 const subtractDate = (dayOfTheWeek) => {
     const now = (0, dayjs_1.default)();
     if (dayOfTheWeek === "Terça-Feira") {

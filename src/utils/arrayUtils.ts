@@ -1,11 +1,3 @@
-
-/**
- * @description filter array of items by title
- * 
- * @param request An object that contains event datas
- * @param title The title from activity that i want
- * @returns a string that contains the item description
- */
 export const getDescriptionByTitle = async (request: any, title: Array<string>): Promise<string> => {
     const description = await request.data.data.filter((activity: any) => {
         if (activity) {
@@ -21,12 +13,12 @@ export const getDescriptionByTitle = async (request: any, title: Array<string>):
 
 export const convertDescriptionToArray = (description: string): Array<string> => {
     const splittedArray: string[] = description.split("\n");    
-    let arrayOfNames: string[] = verifyIfItsName(splittedArray);
+    let arrayOfNames: string[] = validNames(splittedArray);
 
     return arrayOfNames;
 }
 
-export const verifyIfItsName = (splittedByLineBreak: string[]): string[] => {
+export const validNames = (splittedByLineBreak: string[]): string[] => {
     let arrayOfNames: string[] = [];
 
     splittedByLineBreak.forEach(name => {

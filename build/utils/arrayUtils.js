@@ -9,14 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSecondName = exports.fixBigStrings = exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
-/**
- * @description filter array of items by title
- *
- * @param request An object that contains event datas
- * @param title The title from activity that i want
- * @returns a string that contains the item description
- */
+exports.getSecondName = exports.fixBigStrings = exports.validNames = exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
 const getDescriptionByTitle = (request, title) => __awaiter(void 0, void 0, void 0, function* () {
     const description = yield request.data.data.filter((activity) => {
         if (activity) {
@@ -30,12 +23,22 @@ const getDescriptionByTitle = (request, title) => __awaiter(void 0, void 0, void
 });
 exports.getDescriptionByTitle = getDescriptionByTitle;
 const convertDescriptionToArray = (description) => {
-    const splittedArray = description.replace(/(\r\n|\n|\r)/gm, "").split("-");
-    const arrayOfNames = splittedArray.map(name => name.trim());
-    arrayOfNames.shift();
+    const splittedArray = description.split("\n");
+    let arrayOfNames = (0, exports.validNames)(splittedArray);
     return arrayOfNames;
 };
 exports.convertDescriptionToArray = convertDescriptionToArray;
+const validNames = (splittedByLineBreak) => {
+    let arrayOfNames = [];
+    splittedByLineBreak.forEach(name => {
+        console.log(name);
+        if (name.trim()[0] === "-") {
+            arrayOfNames.push(name.replace("-", "").trim().slice(0, name.length));
+        }
+    });
+    return arrayOfNames;
+};
+exports.validNames = validNames;
 const fixBigStrings = (name) => {
     let fixedString = name;
     if (name.length > 14) {
