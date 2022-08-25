@@ -29,7 +29,6 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         else {
             namesDY -= 10;
         }
-        // formattedNames = splittedArray;
         fontSize = 37;
         namesDX = 255;
     }
@@ -42,7 +41,6 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         else {
             namesDY += 165;
         }
-        // formattedNames = splittedArray;
         fontSize = 37;
         namesDX = 255;
     }
@@ -56,7 +54,6 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
             namesDY -= 3;
         }
         namesDX = 225;
-        // formattedNames = splittedArray;
         fontSize = 31;
     }
     else if (sickNames.length < 17) {
@@ -68,7 +65,6 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         else {
             namesDY -= 7;
         }
-        // formattedNames = splittedArray;
         fontSize = 30;
         namesDX = 220;
     }
@@ -83,7 +79,6 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         }
         namesDX = 200;
         fontSize = 26;
-        // formattedNames = splittedArray;
     }
     else if (sickNames.length < 31) {
         if (splittedArray.length > 1) {
@@ -96,14 +91,12 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         }
         namesDX = 198;
         fontSize = 29;
-        // formattedNames = splittedArray;
     }
     return splittedArray;
 };
 exports.formatNames = formatNames;
 const getInicialDY = (sickNames) => {
     let namesDY;
-    // atualizar o DY dos nomes de acordo com o tamanho 
     if (sickNames.length === 1) {
         namesDY = 640;
     }
@@ -120,7 +113,6 @@ const getInicialDY = (sickNames) => {
 };
 exports.getInicialDY = getInicialDY;
 const getInitialDimensionsOfNames = (sickNames) => {
-    // dimensoes dos nomes
     const namesDX = 220, namesDY = (0, exports.getInicialDY)(sickNames), fontSize = 28;
     const lineBreakSize = sickNames.length > 1 ? 40 : 55;
     return {

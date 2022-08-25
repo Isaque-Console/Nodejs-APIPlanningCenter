@@ -14,7 +14,8 @@ const todaysServiceTypeGenerator = (): string => {
       serviceType = dayjs().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
    }
 
-   return serviceType;
+   return "DOMINGO_NOITE";
+   // return serviceType;
 }
 
 const todaysPlanIdGenerator = (todaysServiceType: any): number => {

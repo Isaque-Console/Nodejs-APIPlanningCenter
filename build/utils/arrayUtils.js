@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getSecondName = exports.fixBigStrings = exports.validNames = exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
+exports.getSecondName = exports.fixBigStrings = exports.getValidNames = exports.convertDescriptionToArray = exports.getDescriptionByTitle = void 0;
 const getDescriptionByTitle = (request, title) => __awaiter(void 0, void 0, void 0, function* () {
     const description = yield request.data.data.filter((activity) => {
         if (activity) {
@@ -24,21 +24,20 @@ const getDescriptionByTitle = (request, title) => __awaiter(void 0, void 0, void
 exports.getDescriptionByTitle = getDescriptionByTitle;
 const convertDescriptionToArray = (description) => {
     const splittedArray = description.split("\n");
-    let arrayOfNames = (0, exports.validNames)(splittedArray);
+    let arrayOfNames = (0, exports.getValidNames)(splittedArray);
     return arrayOfNames;
 };
 exports.convertDescriptionToArray = convertDescriptionToArray;
-const validNames = (splittedByLineBreak) => {
+const getValidNames = (splittedByLineBreak) => {
     let arrayOfNames = [];
     splittedByLineBreak.forEach(name => {
-        console.log(name);
         if (name.trim()[0] === "-") {
             arrayOfNames.push(name.replace("-", "").trim().slice(0, name.length));
         }
     });
     return arrayOfNames;
 };
-exports.validNames = validNames;
+exports.getValidNames = getValidNames;
 const fixBigStrings = (name) => {
     let fixedString = name;
     if (name.length > 14) {

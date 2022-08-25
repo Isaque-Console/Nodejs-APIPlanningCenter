@@ -17,7 +17,8 @@ const todaysServiceTypeGenerator = () => {
     else if (dayOfTheWeek === "Domingo") {
         serviceType = (0, dayjs_1.default)().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
     }
-    return serviceType;
+    return "DOMINGO_NOITE";
+    // return serviceType;
 };
 const todaysPlanIdGenerator = (todaysServiceType) => {
     const dayOfTheWeek = (0, dateUtils_1.getDayOfTheWeek)();

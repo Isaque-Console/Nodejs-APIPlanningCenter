@@ -13,17 +13,15 @@ export const getDescriptionByTitle = async (request: any, title: Array<string>):
 
 export const convertDescriptionToArray = (description: string): Array<string> => {
     const splittedArray: string[] = description.split("\n");    
-    let arrayOfNames: string[] = validNames(splittedArray);
+    let arrayOfNames: string[] = getValidNames(splittedArray);
 
     return arrayOfNames;
 }
 
-export const validNames = (splittedByLineBreak: string[]): string[] => {
+export const getValidNames = (splittedByLineBreak: string[]): string[] => {
     let arrayOfNames: string[] = [];
 
-    splittedByLineBreak.forEach(name => {
-        console.log(name);
-        
+    splittedByLineBreak.forEach(name => {        
         if (name.trim()[0] === "-") {           
             arrayOfNames.push(name.replace("-", "").trim().slice(0,name.length));
         }

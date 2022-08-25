@@ -10,10 +10,12 @@ const getDayOfTheWeek = () => {
     const indexOfTheWeek = new Date().getDay();
     if (indexOfTheWeek === 0 || indexOfTheWeek === 2)
         return daysOfTheWeek[indexOfTheWeek];
-    return "";
+    return "Domingo";
+    // return "";
 };
 exports.getDayOfTheWeek = getDayOfTheWeek;
 const subtractDate = (dayOfTheWeek) => {
+    return 3;
     const now = (0, dayjs_1.default)();
     if (dayOfTheWeek === "Terça-Feira") {
         const tuesdayDate = (0, dayjs_1.default)(process.env.DATE_TERCA);
@@ -25,6 +27,6 @@ const subtractDate = (dayOfTheWeek) => {
         const difference = now.diff(sundayDate, 'week');
         return difference;
     }
-    return -1;
+    // return -1
 };
 exports.subtractDate = subtractDate;

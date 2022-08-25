@@ -25,7 +25,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         } else {
             namesDY -= 10
         }
-        // formattedNames = splittedArray;
         fontSize = 37;
         namesDX = 255;
     } else if (sickNames.length === 2) {
@@ -36,7 +35,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         } else {
             namesDY += 165;
         }
-        // formattedNames = splittedArray;
         fontSize = 37;
         namesDX = 255;
     } else if (sickNames.length < 10) {
@@ -48,7 +46,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
             namesDY -= 3;
         }
         namesDX = 225;
-        // formattedNames = splittedArray;
         fontSize = 31;
     }
     else if (sickNames.length < 17) {
@@ -59,7 +56,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         } else {
             namesDY -= 7;
         }
-        // formattedNames = splittedArray;
         fontSize = 30;
         namesDX = 220;
     } else if (sickNames.length < 26) {
@@ -72,7 +68,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         }
         namesDX = 200;
         fontSize = 26;
-        // formattedNames = splittedArray;
     }
     else if (sickNames.length < 31) {
         if (splittedArray.length > 1) {
@@ -84,7 +79,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         }
         namesDX = 198;
         fontSize = 29;
-        // formattedNames = splittedArray;
     }
 
     return splittedArray;
@@ -92,7 +86,6 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
 
 export const getInicialDY = (sickNames: string[]): number => {
     let namesDY: number
-    // atualizar o DY dos nomes de acordo com o tamanho 
     if (sickNames.length === 1) { namesDY = 640; }
     else if (sickNames.length < 10) { namesDY = 445; }
     else if (sickNames.length < 17) { namesDY = 423; }
@@ -102,7 +95,6 @@ export const getInicialDY = (sickNames: string[]): number => {
 }
 
 export const getInitialDimensionsOfNames = (sickNames: string[]) => {
-    // dimensoes dos nomes
     const namesDX = 220, namesDY = getInicialDY(sickNames), fontSize = 28;
     const lineBreakSize: number = sickNames.length > 1 ? 40 : 55;
 

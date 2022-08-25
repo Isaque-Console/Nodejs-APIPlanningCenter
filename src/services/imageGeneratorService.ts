@@ -5,8 +5,8 @@ import path from 'path';
 import { formatNames, getInitialDimensionsOfNames, writeNames } from './writeNamesService';
 
 const checkLimitOfColumns = (limitOfColumns: number, index: number): boolean => {
-
     const result = ((index + 1) % limitOfColumns === 0) ? true : false
+    
     return result;
 }
 
@@ -49,7 +49,7 @@ async function generateImage(sickNames: string[]) {
 
                 if (isColumnLimit) {
                     const newDimensions: any = getDimensionsWhenLineBreak(dx, dy, verticalProximityStickers,
-                        stickersHeight, namesDY, namesDYBase, initialBorder)
+                        stickersHeight, namesDY, namesDYBase, initialBorder);
                     dx = newDimensions.dx;
                     dy = newDimensions.dy;
                     namesDY = newDimensions.namesDY;
