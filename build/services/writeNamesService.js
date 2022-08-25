@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getInitialDimensionsOfNames = exports.getInicialDY = exports.formatNames = exports.writeNames = void 0;
 const arrayUtils_1 = require("../utils/arrayUtils");
-const writeNames = (formattedNames, fontSize, dx, namesFrontStickers, namesDY, sickName, lineBreakSize, context) => {
+const writeNames = (formattedNames, fontSize, dx, namesDX, namesDY, sickName, lineBreakSize, context) => {
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
             context.font = `500 ${fontSize}px RobotoFlex`;
             const fixedName = (0, arrayUtils_1.fixBigStrings)(name);
-            context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+            context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
         }
         formattedNames = [];
@@ -15,7 +15,7 @@ const writeNames = (formattedNames, fontSize, dx, namesFrontStickers, namesDY, s
     else {
         context.font = `500 ${fontSize}px RobotoFlex`;
         const fixedName = (0, arrayUtils_1.fixBigStrings)(sickName);
-        context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+        context.fillText(fixedName, (dx + namesDX), namesDY);
     }
 };
 exports.writeNames = writeNames;
@@ -92,7 +92,9 @@ const formatNames = (sickNames, splittedArray, namesDX, namesDY, fontSize) => {
         namesDX = 198;
         fontSize = 29;
     }
-    return splittedArray;
+    return {
+        formattedNames: splittedArray, namesDX, namesDY, fontSize
+    };
 };
 exports.formatNames = formatNames;
 const getInicialDY = (sickNames) => {

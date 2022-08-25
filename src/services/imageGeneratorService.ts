@@ -6,7 +6,7 @@ import { formatNames, getInitialDimensionsOfNames, writeNames } from './writeNam
 
 const checkLimitOfColumns = (limitOfColumns: number, index: number): boolean => {
     const result = ((index + 1) % limitOfColumns === 0) ? true : false
-    
+
     return result;
 }
 
@@ -40,7 +40,10 @@ async function generateImage(sickNames: string[]) {
                 context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
 
                 splittedArray = sickNames[i].split(" ");
-                const formattedNames: string[] = formatNames(sickNames, splittedArray, namesDX, namesDY, fontSize);
+                
+                const response: any = formatNames(sickNames, splittedArray, namesDX, namesDY, fontSize);
+                const formattedNames: string[] = response.formattedNames;
+                namesDX = response.namesDX, namesDY = response.namesDY, fontSize = response.fontSize;
 
                 writeNames(formattedNames, fontSize, dx, namesDX, namesDY, sickNames[i], lineBreakSize, context);
 

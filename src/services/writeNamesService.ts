@@ -1,22 +1,22 @@
 import { fixBigStrings, getSecondName } from "../utils/arrayUtils";
 
-export const writeNames = (formattedNames: string[], fontSize: number, dx: number, namesFrontStickers: number, namesDY: number, sickName: string, lineBreakSize: number, context: any) => {
+export const writeNames = (formattedNames: string[], fontSize: number, dx: number, namesDX: number, namesDY: number, sickName: string, lineBreakSize: number, context: any) => {
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
             context.font = `500 ${fontSize}px RobotoFlex`;
             const fixedName = fixBigStrings(name);
-            context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+            context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
         }
         formattedNames = [];
     } else {
         context.font = `500 ${fontSize}px RobotoFlex`;
         const fixedName = fixBigStrings(sickName);
-        context.fillText(fixedName, (dx + namesFrontStickers), namesDY);
+        context.fillText(fixedName, (dx + namesDX), namesDY);
     }
 }
 
-export const formatNames = (sickNames: string[], splittedArray: string[], namesDX: number, namesDY: number, fontSize: number): string[] => {
+export const formatNames = (sickNames: string[], splittedArray: string[], namesDX: number, namesDY: number, fontSize: number): Object => {
     if (sickNames.length === 1) {
         if (splittedArray.length > 1) {
             splittedArray[1] = getSecondName(splittedArray);
@@ -81,7 +81,9 @@ export const formatNames = (sickNames: string[], splittedArray: string[], namesD
         fontSize = 29;
     }
 
-    return splittedArray;
+    return {
+        formattedNames: splittedArray , namesDX, namesDY, fontSize
+    };
 }
 
 export const getInicialDY = (sickNames: string[]): number => {

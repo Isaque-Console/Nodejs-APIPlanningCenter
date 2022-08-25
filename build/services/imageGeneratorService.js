@@ -41,7 +41,9 @@ function generateImage(sickNames) {
                 for (let i = 0; i < sickNames.length; i++) {
                     canvasConfig_1.context.drawImage(image, dx, dy, stickersWidth, stickersHeight);
                     splittedArray = sickNames[i].split(" ");
-                    const formattedNames = (0, writeNamesService_1.formatNames)(sickNames, splittedArray, namesDX, namesDY, fontSize);
+                    const response = (0, writeNamesService_1.formatNames)(sickNames, splittedArray, namesDX, namesDY, fontSize);
+                    const formattedNames = response.formattedNames;
+                    namesDX = response.namesDX, namesDY = response.namesDY, fontSize = response.fontSize;
                     (0, writeNamesService_1.writeNames)(formattedNames, fontSize, dx, namesDX, namesDY, sickNames[i], lineBreakSize, canvasConfig_1.context);
                     namesDY = namesDYBase;
                     const isColumnLimit = checkLimitOfColumns(limitOfColumns, i);
