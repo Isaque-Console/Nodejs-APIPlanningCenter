@@ -15,6 +15,7 @@ const todaysServiceTypeGenerator = () => {
         serviceType = "CULTO_DE_ENSINO";
     }
     else if (dayOfTheWeek === "Domingo") {
+        console.log((0, dayjs_1.default)().hour());
         serviceType = (0, dayjs_1.default)().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
     }
     return serviceType;
