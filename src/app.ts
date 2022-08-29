@@ -9,7 +9,7 @@ import { convertDescriptionToArray } from "./utils/arrayUtils";
 import dayjs from "dayjs";
 
 server.get('/generate/image', async (req, res) => {
-    console.log((dayjs().hour() - 3));
+    console.log(dayjs().hour());
     
     const url: string = await generateURL();
     const description = await getDescription(url);
