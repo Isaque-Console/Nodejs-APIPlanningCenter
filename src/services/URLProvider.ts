@@ -11,7 +11,8 @@ const todaysServiceTypeGenerator = (): string => {
    if (dayOfTheWeek === "Terça-Feira") {
       serviceType = "CULTO_DE_ENSINO";
    } else if (dayOfTheWeek === "Domingo") {
-      serviceType = dayjs().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
+      // pega hora atual - 3, pois o horario do servidor no heroku esta 3 horas adiantado em relacao ao horario de Fortaleza, CE.
+      serviceType = (dayjs().hour() - 3) > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
    }
 
    return serviceType;
