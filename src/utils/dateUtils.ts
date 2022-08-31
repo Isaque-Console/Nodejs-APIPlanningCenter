@@ -11,7 +11,7 @@ export const getDayOfTheWeek = (): string => {
 export const subtractDate = (dayOfTheWeek: string): number => {
     const now = dayjs();
 
-    if (dayOfTheWeek === "Terça-Feira") {
+    if (dayOfTheWeek === "Terça-Feira" || dayOfTheWeek === "Quarta-Feira") {
         const tuesdayDate = dayjs(process.env.DATE_TERCA);
         const difference = now.diff(tuesdayDate, 'week')
 
