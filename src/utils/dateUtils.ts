@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 export const getDayOfTheWeek = (): string => {
     const daysOfTheWeek = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
     const indexOfTheWeek = new Date().getDay();
-    if (indexOfTheWeek === 0 || indexOfTheWeek === 2) return daysOfTheWeek[indexOfTheWeek]
+    if (indexOfTheWeek === 0 || indexOfTheWeek === 2 || indexOfTheWeek === 3) {return daysOfTheWeek[indexOfTheWeek]
 
     return "";
 }
