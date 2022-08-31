@@ -25,7 +25,7 @@ const todaysPlanIdGenerator = (todaysServiceType: any): number => {
 
    const diffenrenceInWeeks: number = subtractDate(dayOfTheWeek);
    if(diffenrenceInWeeks === -1) return diffenrenceInWeeks;
-   const planId = process.env[`PLAN_ID_${todaysServiceType}`] ? process.env[`PLAN_ID_${todaysServiceType}`] : "0";;
+   const planId = process.env[`PLAN_ID_${todaysServiceType}`] ? process.env[`PLAN_ID_${todaysServiceType}`] : "0";
    const todaysPlanId: number = diffenrenceInWeeks + Number(planId);
 
    return todaysPlanId;
@@ -34,6 +34,9 @@ const todaysPlanIdGenerator = (todaysServiceType: any): number => {
 export const generateURL = (): string => {
    const serviceType = todaysServiceTypeGenerator();
    const todaysPlanId: number = todaysPlanIdGenerator(serviceType);
+   console.log("Service type: " + serviceType);
+   console.log("Todays plan id: " + todaysPlanId);
+   
 
    if (!serviceType.length || todaysPlanId === -1) return "Hoje não tem nenhum evento."
 
