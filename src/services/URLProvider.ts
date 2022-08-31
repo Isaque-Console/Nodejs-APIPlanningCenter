@@ -3,16 +3,16 @@ import { getDayOfTheWeek, subtractDate } from "../utils/dateUtils"
 
 const todaysServiceTypeGenerator = (): string => {
    let serviceType: string = "";
-   console.log(dayjs().hour());
-
    const dayOfTheWeek: string = getDayOfTheWeek();
 
    if (!dayOfTheWeek.length) return "";
 
-   if (dayOfTheWeek === "Terça-Feira") {
+   // Quarta-feira esta sendo levado em consideracao, pois o horario do servidor no heroku e diferente e pode acusar esse dia, ao inves de terca, dependendo do horario
+   if (dayOfTheWeek === "Terça-Feira" || dayOfTheWeek === "Quarta-Feira") {
       serviceType = "CULTO_DE_ENSINO";
-   } else if (dayOfTheWeek === "Domingo") {      
-      serviceType = dayjs().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
+   } else if (dayOfTheWeek === "Domingo") {
+      // hora atual -3, pois o horario do servidor no heroku esta 3 horas adiantado em relacao ao horario do Brasil
+      serviceType = (dayjs().hour() - 3) > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
    }
 
    return serviceType;
