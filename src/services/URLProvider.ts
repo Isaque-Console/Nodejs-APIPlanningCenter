@@ -34,9 +34,6 @@ const todaysPlanIdGenerator = (todaysServiceType: any): number => {
 export const generateURL = (): string => {
    const serviceType = todaysServiceTypeGenerator();
    const todaysPlanId: number = todaysPlanIdGenerator(serviceType);
-   console.log("Service type: " + serviceType);
-   console.log("Todays plan id: " + todaysPlanId);
-   
 
    if (!serviceType.length || todaysPlanId === -1) return "Hoje não tem nenhum evento."
 

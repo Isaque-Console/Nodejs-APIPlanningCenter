@@ -6,13 +6,11 @@ import { generateURL } from "./services/URLProvider";
 const server: express.Application = express();
 import generateImage from './services/imageGeneratorService'
 import { convertDescriptionToArray } from "./utils/arrayUtils";
-import dayjs from "dayjs";
 
 server.get('/generate/image', async (req, res) => {    
-    const url: string = await generateURL();
-    console.log(url);
-    
+    const url: string = await generateURL();    
     const description = await getDescription(url);
+
     if (description.length === 0) return res.status(404).send({ message: "Não tem nenhum registro para hoje." });
 
     try {
