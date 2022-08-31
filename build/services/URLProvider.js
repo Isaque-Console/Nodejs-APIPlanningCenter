@@ -11,12 +11,13 @@ const todaysServiceTypeGenerator = () => {
     const dayOfTheWeek = (0, dateUtils_1.getDayOfTheWeek)();
     if (!dayOfTheWeek.length)
         return "";
-    if (dayOfTheWeek === "Terça-Feira") {
+    // Quarta-feira esta sendo levado em consideracao, pois o horario do servidor no heroku e diferente e pode acusar esse dia, ao inves de terca, dependendo do horario
+    if (dayOfTheWeek === "Terça-Feira" || dayOfTheWeek === "Quarta-Feira") {
         serviceType = "CULTO_DE_ENSINO";
     }
     else if (dayOfTheWeek === "Domingo") {
-        console.log((0, dayjs_1.default)().hour());
-        serviceType = (0, dayjs_1.default)().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
+        // hora atual -3, pois o horario do servidor no heroku esta 3 horas adiantado em relacao ao horario do Brasil
+        serviceType = ((0, dayjs_1.default)().hour() - 3) > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
     }
     return serviceType;
 };
