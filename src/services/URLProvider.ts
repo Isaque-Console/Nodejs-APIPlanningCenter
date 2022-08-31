@@ -3,6 +3,7 @@ import { getDayOfTheWeek, subtractDate } from "../utils/dateUtils"
 
 const todaysServiceTypeGenerator = (): string => {
    let serviceType: string = "";
+   console.log(dayjs().hour());
 
    const dayOfTheWeek: string = getDayOfTheWeek();
 
@@ -10,9 +11,7 @@ const todaysServiceTypeGenerator = (): string => {
 
    if (dayOfTheWeek === "Terça-Feira") {
       serviceType = "CULTO_DE_ENSINO";
-   } else if (dayOfTheWeek === "Domingo") {
-      console.log(dayjs().hour());
-      
+   } else if (dayOfTheWeek === "Domingo") {      
       serviceType = dayjs().hour() > 13 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
    }
 
