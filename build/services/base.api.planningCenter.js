@@ -15,14 +15,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDescription = void 0;
 const axiosConfig_1 = __importDefault(require("../config/axios/axiosConfig"));
 const arrayUtils_1 = require("../utils/arrayUtils");
-/**
- * @description Get event datas from planning center and filter by title
- *
- * @returns a string that contains the item description
- */
 const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield axiosConfig_1.default.get(url);
-    const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura"]);
+    const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura", "intersessao por cura", "intercesao por cura", "intercessao por curas", "intercesao por curas", "intersessao por curas"]);
     return description;
 });
 exports.getDescription = getDescription;

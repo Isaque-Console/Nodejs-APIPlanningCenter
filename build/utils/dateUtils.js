@@ -8,14 +8,14 @@ const dayjs_1 = __importDefault(require("dayjs"));
 const getDayOfTheWeek = () => {
     const daysOfTheWeek = ["Domingo", "Segunda-Feira", "Terça-Feira", "Quarta-Feira", "Quinta-Feira", "Sexta-Feira", "Sábado"];
     const indexOfTheWeek = new Date().getDay();
-    if (indexOfTheWeek === 0 || indexOfTheWeek === 2)
+    if (indexOfTheWeek === 0 || indexOfTheWeek === 2 || indexOfTheWeek === 3)
         return daysOfTheWeek[indexOfTheWeek];
     return "";
 };
 exports.getDayOfTheWeek = getDayOfTheWeek;
 const subtractDate = (dayOfTheWeek) => {
     const now = (0, dayjs_1.default)();
-    if (dayOfTheWeek === "Terça-Feira") {
+    if (dayOfTheWeek === "Terça-Feira" || dayOfTheWeek === "Quarta-Feira") {
         const tuesdayDate = (0, dayjs_1.default)(process.env.DATE_TERCA);
         const difference = now.diff(tuesdayDate, 'week');
         return difference;
