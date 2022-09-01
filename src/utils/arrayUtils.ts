@@ -1,8 +1,8 @@
-export const getDescriptionByTitle = async (request: any, title: Array<string>): Promise<string> => {
+export const getDescriptionByTitle = async (request: any, titles: Array<string>): Promise<string> => {
     const description = await request.data.data.filter((activity: any) => {
         if (activity) {
             const titleWithoutAccent: string = activity.attributes.title.trim().toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "");
-            if (title.includes(titleWithoutAccent)) {
+            if (titles.includes(titleWithoutAccent)) {
                 return activity.attributes.description;
             }
         }
