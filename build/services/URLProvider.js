@@ -17,7 +17,7 @@ const todaysServiceTypeGenerator = () => {
     }
     else if (dayOfTheWeek === "Domingo") {
         // hora atual -3, pois o horario do servidor no heroku esta 3 horas adiantado em relacao ao horario do Brasil
-        serviceType = ((0, dayjs_1.default)().hour() - 3) > 14 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
+        serviceType = ((0, dayjs_1.default)().hour() - 3) > 15 ? "DOMINGO_NOITE" : "DOMINGO_MANHA";
     }
     return serviceType;
 };
