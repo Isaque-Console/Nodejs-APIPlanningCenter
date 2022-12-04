@@ -17,7 +17,7 @@ const axiosConfig_1 = __importDefault(require("../config/axios/axiosConfig"));
 const arrayUtils_1 = require("../utils/arrayUtils");
 const getDescription = (url) => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield axiosConfig_1.default.get(url);
-    const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura", "intersessao por cura", "intercesao por cura", "intercessao por curas", "intercesao por curas", "intersessao por curas"]);
+    const description = yield (0, arrayUtils_1.getDescriptionByTitle)(response, ["intercessao", "interceçao", "intercessao", "intersesao", "intercesao", "intersessao", "intercessao por cura", "intersessao por cura", "intercesao por cura", "intercessao por curas", "intercesao por curas", "intersessao por curas", "intercessao por cura/mural de oraçao"]);
     return description;
 });
 exports.getDescription = getDescription;
