@@ -6,7 +6,7 @@ const writeNames = (formattedNames, fontSize, dx, namesDX, namesDY, sickName, li
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
             // context.font = `500 ${fontSize}px RobotoFlex`;
-            context.font = "Arial";
+            context.font = `${fontSize}px Arial`;
             const fixedName = (0, arrayUtils_1.fixBigStrings)(name);
             context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
@@ -15,7 +15,7 @@ const writeNames = (formattedNames, fontSize, dx, namesDX, namesDY, sickName, li
     }
     else {
         // context.font = `500 ${fontSize}px RobotoFlex`;
-        context.font = "Arial";
+        context.font = `${fontSize}px Arial`;
         const fixedName = (0, arrayUtils_1.fixBigStrings)(sickName);
         context.fillText(fixedName, (dx + namesDX), namesDY);
     }

@@ -4,7 +4,7 @@ export const writeNames = (formattedNames: string[], fontSize: number, dx: numbe
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
             // context.font = `500 ${fontSize}px RobotoFlex`;
-            context.font = "Arial";
+            context.font = `${fontSize}px Arial`;
             const fixedName = fixBigStrings(name);
             context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
@@ -12,7 +12,7 @@ export const writeNames = (formattedNames: string[], fontSize: number, dx: numbe
         formattedNames = [];
     } else {
         // context.font = `500 ${fontSize}px RobotoFlex`;
-        context.font = "Arial";
+        context.font = `${fontSize}px Arial`;
         const fixedName = fixBigStrings(sickName);
         context.fillText(fixedName, (dx + namesDX), namesDY);
     }
