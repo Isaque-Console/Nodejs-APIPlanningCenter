@@ -3,7 +3,7 @@ import { fixBigStrings, getSecondName } from "../utils/arrayUtils";
 export const writeNames = (formattedNames: string[], fontSize: number, dx: number, namesDX: number, namesDY: number, sickName: string, lineBreakSize: number, context: any) => {
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
-            context.font = `500 ${fontSize}px RobotoFlex`;
+            // context.font = `500 ${fontSize}px RobotoFlex`;
             const fixedName = fixBigStrings(name);
             context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
