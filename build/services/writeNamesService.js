@@ -5,7 +5,8 @@ const arrayUtils_1 = require("../utils/arrayUtils");
 const writeNames = (formattedNames, fontSize, dx, namesDX, namesDY, sickName, lineBreakSize, context) => {
     if (formattedNames.length !== 0) {
         for (let name of formattedNames) {
-            context.font = `500 ${fontSize}px RobotoFlex`;
+            // context.font = `500 ${fontSize}px RobotoFlex`;
+            context.font = "Arial";
             const fixedName = (0, arrayUtils_1.fixBigStrings)(name);
             context.fillText(fixedName, (dx + namesDX), namesDY);
             namesDY += lineBreakSize;
@@ -13,7 +14,8 @@ const writeNames = (formattedNames, fontSize, dx, namesDX, namesDY, sickName, li
         formattedNames = [];
     }
     else {
-        context.font = `500 ${fontSize}px RobotoFlex`;
+        // context.font = `500 ${fontSize}px RobotoFlex`;
+        context.font = "Arial";
         const fixedName = (0, arrayUtils_1.fixBigStrings)(sickName);
         context.fillText(fixedName, (dx + namesDX), namesDY);
     }
