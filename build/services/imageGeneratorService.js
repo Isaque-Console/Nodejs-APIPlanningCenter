@@ -17,6 +17,8 @@ const canvasConfig_1 = require("../config/canvas/canvasConfig");
 const writeStickersService_1 = require("./writeStickersService");
 const path_1 = __importDefault(require("path"));
 const writeNamesService_1 = require("./writeNamesService");
+// registerFont(path.resolve('../fonts/Poppins-Regular.ttf'), { family: 'Poppins' })
+(0, canvas_1.registerFont)(`${__dirname}/../fonts/Poppins-Regular.ttf`, { family: 'Poppins' });
 const checkLimitOfColumns = (limitOfColumns, index) => {
     const result = ((index + 1) % limitOfColumns === 0) ? true : false;
     return result;

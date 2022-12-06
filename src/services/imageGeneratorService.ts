@@ -1,8 +1,10 @@
-import { loadImage } from 'canvas'
+import { loadImage, registerFont } from 'canvas'
 import { canvas, context } from '../config/canvas/canvasConfig';
 import { getStickersDimensions } from './writeStickersService'
 import path from 'path';
 import { formatNames, getInitialDimensionsOfNames, writeNames } from './writeNamesService';
+// registerFont(path.resolve('../fonts/Poppins-Regular.ttf'), { family: 'Poppins' })
+registerFont(`${__dirname}/../fonts/Poppins-Regular.ttf`, { family: 'Poppins' })
 
 const checkLimitOfColumns = (limitOfColumns: number, index: number): boolean => {
     const result = ((index + 1) % limitOfColumns === 0) ? true : false
