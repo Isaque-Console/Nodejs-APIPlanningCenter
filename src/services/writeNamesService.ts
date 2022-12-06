@@ -10,7 +10,7 @@ export const writeNames = (formattedNames: string[], fontSize: number, dx: numbe
         }
         formattedNames = [];
     } else {
-        context.font = `500 ${fontSize}px RobotoFlex`;
+        // context.font = `500 ${fontSize}px RobotoFlex`;
         const fixedName = fixBigStrings(sickName);
         context.fillText(fixedName, (dx + namesDX), namesDY);
     }
