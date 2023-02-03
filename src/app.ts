@@ -7,6 +7,10 @@ const server: express.Application = express();
 import generateImage from './services/imageGeneratorService'
 import { convertDescriptionToArray } from "./utils/arrayUtils";
 
+server.get('/', async (req, res) => {
+    res.json({message: "Hello world!"});
+})
+
 server.get('/generate/image', async (req, res) => {    
     const url: string = await generateURL();    
     const description = await getDescription(url);
@@ -21,8 +25,8 @@ server.get('/generate/image', async (req, res) => {
         res.setHeader("Content-Disposition", `attachment; filename=mural_de_oracao.png`);
         pngData.pipe(res);
     } catch (error: any) {
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ error: "Erro ao gerar imagem" }));
+        // res.setHeader('Content-Type', 'application/json');
+        // res.send(JSON.stringify({ error: "Erro ao gerar imagem" }));
     }
 })
 
