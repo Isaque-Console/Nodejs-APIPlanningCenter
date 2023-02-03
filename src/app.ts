@@ -8,7 +8,7 @@ import generateImage from './services/imageGeneratorService'
 import { convertDescriptionToArray } from "./utils/arrayUtils";
 
 server.get('/', async (req, res) => {
-    res.json({message: "Hello world!"});
+    res.send({message: "Hello world!"});
 })
 
 server.get('/generate/image', async (req, res) => {    

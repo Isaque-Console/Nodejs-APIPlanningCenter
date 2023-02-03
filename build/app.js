@@ -20,6 +20,9 @@ const URLProvider_1 = require("./services/URLProvider");
 const server = (0, express_1.default)();
 const imageGeneratorService_1 = __importDefault(require("./services/imageGeneratorService"));
 const arrayUtils_1 = require("./utils/arrayUtils");
+server.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    res.json({ message: "Hello world!" });
+}));
 server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = yield (0, URLProvider_1.generateURL)();
     const description = yield (0, base_api_planningCenter_1.getDescription)(url);
@@ -32,8 +35,8 @@ server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, fu
         pngData.pipe(res);
     }
     catch (error) {
-        res.setHeader('Content-Type', 'application/json');
-        res.end(JSON.stringify({ error: "Erro ao gerar imagem" }));
+        // res.setHeader('Content-Type', 'application/json');
+        // res.send(JSON.stringify({ error: "Erro ao gerar imagem" }));
     }
 }));
 server.listen(process.env.PORT, () => {
