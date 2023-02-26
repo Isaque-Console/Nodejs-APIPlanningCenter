@@ -21,7 +21,7 @@ const server = (0, express_1.default)();
 const imageGeneratorService_1 = __importDefault(require("./services/imageGeneratorService"));
 const arrayUtils_1 = require("./utils/arrayUtils");
 server.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({ message: "Hello world!" });
+    res.send({ message: "Hello world!" });
 }));
 server.get('/generate/image', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const url = yield (0, URLProvider_1.generateURL)();
