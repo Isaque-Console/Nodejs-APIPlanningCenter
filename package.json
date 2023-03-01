@@ -7,7 +7,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "tsc & node ./build/app.js",
+    "start": "tsc & nodemon ./build/app.js",
     "dev": "tsc & nodemon ./build/app.js",
     "build": "npx tsc"
   },
