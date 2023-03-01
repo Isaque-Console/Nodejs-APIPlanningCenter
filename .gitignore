@@ -3,3 +3,5 @@ node_modules
 .env
 
 Anotacoes_planningCenter
+
+Dockerfile
